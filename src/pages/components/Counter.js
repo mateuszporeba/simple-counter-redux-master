@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, selectValue } from '../store/counterSlice'
+import { increment, decrement, incrementByAmount, resetCounter, selectValue } from '../store/counterSlice'
 import classes from './Counter.module.css';
 
 const Counter = () => {
@@ -8,6 +8,7 @@ const Counter = () => {
   const counter = useSelector(selectValue)
   const dispatch = useDispatch()
   const [showCounter, setShowCounter] = useState(false)
+  const [incrementAmount, setIncrementAmount] = useState(0);
 
   console.log(counter)
 
@@ -21,19 +22,30 @@ const Counter = () => {
   }
 
   const toggleCounterHandler = () => {
-    setShowCounter(!showCounter)
+    dispatch(resetCounter())
+  }
+
+  const incrementByAmountHandler = () => {
+    dispatch(incrementByAmount(Number(incrementAmount)))
   }
 
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{showCounter ? counter : '-- COUNTER VALUE --'}</div>
+      <div className={classes.value}>{counter}</div>
       <div>
         <button onClick={decrementHandler}>Decrement</button>
         <button onClick={incrementHandler}>Increment</button>
+        <div>
+          <input
+            value={incrementAmount}
+            onChange={e => setIncrementAmount(e.target.value)}
+          />
+          <button onClick={incrementByAmountHandler}>incrementByAmount</button>
+        </div>
       </div>
-      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+      <button onClick={toggleCounterHandler}>Reset Counter</button>
     </main>
   );
 };
