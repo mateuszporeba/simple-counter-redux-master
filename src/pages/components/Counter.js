@@ -11,6 +11,7 @@ const Counter = () => {
   const [incrementAmount, setIncrementAmount] = useState(0);
 
   console.log(counter)
+  console.log(useSelector((state) => state.counter.value))
 
   const incrementHandler = () => {
     dispatch(increment())
