@@ -27,3 +27,7 @@
   padding: 0.25rem;
   border: 1px solid #ccc;
 }
+
+.labelError {
+  background-color: rgba(158, 26, 26, 0.836);
+}
