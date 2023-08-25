@@ -16,8 +16,6 @@ const Auth = (props) => {
   const auth = useSelector((state) => state.authentication.isAuthenticated)
   const dispatch = useDispatch()
 
-  console.log(auth);
-
   const loginHandler = (e) => {
     e.preventDefault()
     setIsAuth(true);
@@ -29,44 +27,41 @@ const Auth = (props) => {
       setIsPasswordError(true)
       setIsAuth(false)
     }
-    if(isAuth){
+    if (isAuth) {
       dispatch(login())
       props.login()
     }
-    //console.log(emailRef.current.value)
   }
 
-  // if (emailRef.current === document.activeElement) {
-  //   setIsEmailError(false);
-  // }
-  ueh
-  if(document.hasFocus() && ref.current.contains(document.activeElement)){
-
+  const emailDisableErrorState = () => {
+    setIsEmailError(false)
   }
-
-  const emailOnChangeHandler = () =>{
-    //setIsEmailError(false);
+  const passwordDisableErrorState = () =>{
+    setIsPasswordError(false)
   }
 
 
   return (
     <main className={classes.auth}>
       <section>
-        <form>
+        <form onSubmit={loginHandler}>
           <div className={classes.control}>
             <label htmlFor='email'>Email</label>
             <input type='email' id='email' ref={emailRef}
-              className={isEmailError ? classes.labelError : ''} 
-              onChange={emailOnChangeHandler}/>
-              
-              
+              className={isEmailError ? classes.labelError : ''}
+              onFocus={emailDisableErrorState}
+            />
+
+
           </div>
           <div className={classes.control}>
             <label htmlFor='password'>Password</label>
             <input type='password' id='password' ref={passwordRef}
-              className={isPasswordError ? classes.labelError : ''} />
+              className={isPasswordError ? classes.labelError : ''} 
+              onFocus={passwordDisableErrorState}
+              />
           </div>
-          <button onClick={loginHandler}>Login</button>
+          <button>Login</button>
         </form>
       </section>
     </main>

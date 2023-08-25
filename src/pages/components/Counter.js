@@ -10,9 +10,6 @@ const Counter = () => {
   const [showCounter, setShowCounter] = useState(false)
   const [incrementAmount, setIncrementAmount] = useState(0);
 
-  console.log(counter)
-  console.log(useSelector((state) => state.counter.value))
-
   const incrementHandler = () => {
     dispatch(increment())
     //dispatch({type: increment})     //also works
